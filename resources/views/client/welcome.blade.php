@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Landing | Velzon - Admin & Dashboard Template</title>
+    <title>Ismem | Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -15,24 +15,29 @@
     <script src="assets/js/layout.js"></script>
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 </head>
+<style>
+    .bg-custom {
+    background-color: #074bb0 !important;
+}
+</style>
 
 <body data-bs-spy="scroll" data-bs-target="#navbar-example">
 
     <!-- Begin page -->
     <div class="layout-wrapper landing">
-        <nav class="navbar navbar-expand-lg navbar-landing navbar-light fixed-top" id="navbar">
+        <nav class="navbar navbar-expand-lg navbar-landing navbar-light bg-custom fixed-top" id="navbar">
             <div class="container">
                 <a class="navbar-brand" href="index.html">
-                    <img src="{{ asset('assets/img/ismem2/logo-oficial.jpg') }}" class="card-logo card-logo-dark" alt="logo dark" height="60" style="border-radius: 30px">
-                    <img src="{{ asset('assets/img/ismem2/logo-oficial.jpg') }}" class="card-logo card-logo-light" alt="logo light" height="60" style="border-radius: 30px">
+                    <img src="https://proyecto.ismemvirtual.com/ismem2024/logoismem.png" class="card-logo card-logo-dark" alt="logo dark" height="60" style="border-radius: 30px">
+                    <img src="https://proyecto.ismemvirtual.com/ismem2024/logoismem.png" class="card-logo card-logo-light" alt="logo light" height="60" style="border-radius: 30px">
                 </a>
                 <button class="navbar-toggler py-0 fs-20 text-body" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="mdi mdi-menu"></i>
@@ -41,19 +46,19 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto mt-2 mt-lg-0" id="navbar-example">
                         <li class="nav-item">
-                            <a class="nav-link fs-15 active" href="#hero">Inicio</a>
+                            <a class="nav-link fs-15 active" href="#hero"><span class="text-success">Inicio</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fs-15" href="#carreras">Carreras</a>
+                            <a class="nav-link fs-15" href="#carreras"><span class="text-white">Carreras</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fs-15" href="#marketplace">Inscripciones</a>
+                            <a class="nav-link fs-15" href="#marketplace"><span class="text-white">Inscripciones</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fs-15" href="#talleres">Talleres</a>
+                            <a class="nav-link fs-15" href="#talleres"><span class="text-white">Talleres</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fs-15" href="#creators">Contactos</a>
+                            <a class="nav-link fs-15" href="#creators"><span class="text-white">Contactos</span></a>
                         </li>
                     </ul>
 
@@ -150,7 +155,7 @@
                                 <b>Somos tu camino</b><br>
                                 <span class="text-white"><b>al éxito</b></span>
                             </h1>
-                            <video class="mb-3" id="welcome-video" width="100%" autoplay muted controls>
+                            <video class="mb-3" id="welcome-video" width="100%" autoplay muted controls loop>
                                 <source src="{{ asset('assets/images/videos/video_welcome.mp4') }}" type="video/mp4">
                             </video>
 

@@ -15587,7 +15587,7 @@ span.flatpickr-weekday {
   }
 }
 .navbar-landing .navbar-nav .nav-item .nav-link:hover, .navbar-landing .navbar-nav .nav-item .nav-link.active, .navbar-landing .navbar-nav .nav-item .nav-link:focus {
-  color: #0ab39c !important;
+  color: white !important;
 }
 .navbar-landing.is-sticky {
   background-color: var(--vz-card-bg-custom);
