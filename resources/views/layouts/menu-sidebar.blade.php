@@ -418,7 +418,7 @@
             <div class="dropdown topbar-head-dropdown ms-1 header-item" id="notificationDropdown">
                 <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" id="page-header-notifications-dropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
                     <i class='bx bx-bell fs-22'></i>
-                    <span class="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger">{{ $totalNotificaciones }}<span class="visually-hidden">unread messages</span></span>
+                    <span class="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger" id="notification-badge">{{ $totalNotificaciones }}<span class="visually-hidden">unread messages</span></span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-notifications-dropdown">
 
@@ -723,13 +723,10 @@
                     </li>
                 </ul>
             </div>
-            <!-- Sidebar -->
         </div>
 
         <div class="sidebar-background"></div>
     </div>
-    <!-- Left Sidebar End -->
-    <!-- Vertical Overlay-->
     <div class="vertical-overlay"></div>
 
 </div>

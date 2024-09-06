@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\GeneralController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
+use App\Mail\ContactanosMailable;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +34,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::get('consultas', function () {
+    Mail::to('victor@codersfree.com')->send(new ContactanosMailable);
+
+    return "Mensaje enviado";
+
+})->name('consultas');
+
 
 Route::get('/consultas/listado', [GeneralController::class, 'consultas_list'])->name('general.consultas_list');
 

@@ -31,13 +31,13 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $user_count = User::count();
+        // $user_count = User::count();
 
-        if ($user_count >= 1) {
-            throw ValidationException::withMessages([
-                'limit' => 'No se puede registrar más de un usuario.',
-            ]);
-        }
+        // if ($user_count >= 1) {
+        //     throw ValidationException::withMessages([
+        //         'limit' => 'No se puede registrar más de un usuario.',
+        //     ]);
+        // }
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],

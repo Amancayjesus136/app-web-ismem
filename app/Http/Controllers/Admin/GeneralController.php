@@ -11,7 +11,7 @@ class GeneralController extends Controller
 {
     public function consultas_list(Request $request)
     {
-        $notificaciones = Notificacion::all();
+        $notificaciones = Notificacion::orderBy('created_at', 'desc')->get();
         $totalNotificaciones = Notificacion::count();
         $query = Consultas::query();
 

@@ -11,7 +11,7 @@ class DashboardController extends Controller
     public function dashboard()
     {
         $totalConsultas = Consultas::count();
-        $notificaciones = Notificacion::all();
+        $notificaciones = Notificacion::orderBy('created_at', 'desc')->get();
         $totalNotificaciones = Notificacion::count();
         return view('dashboard', compact('totalConsultas', 'notificaciones', 'totalNotificaciones'));
     }

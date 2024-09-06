@@ -6,6 +6,8 @@ use App\Models\Notificacion;
 use App\Models\Users\Consultas;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use App\Mail\ContactanosMailable;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 
 class WelcomeController extends Controller
@@ -38,6 +40,9 @@ class WelcomeController extends Controller
                     'created_at' => now(),
                     'updated_at' => now()
                 ]);
+
+                Mail::to('brenda@ismem.edu.pe')
+                    ->send(new ContactanosMailable($consulta->con_correo, $fullName));
 
                 return response()->json([
                     'success' => true,
