@@ -34,14 +34,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get('consultas', function () {
-    Mail::to('victor@codersfree.com')->send(new ContactanosMailable);
-
-    return "Mensaje enviado";
-
-})->name('consultas');
-
 
 Route::get('/consultas/listado', [GeneralController::class, 'consultas_list'])->name('general.consultas_list');
+
+Route::get('/panel/general', [GeneralController::class, 'panel_control'])->name('general.panel_control');
+Route::post('/info/store', [GeneralController::class, 'info_store'])->name('general.info_store');
 
 require __DIR__.'/auth.php';

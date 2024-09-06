@@ -60,7 +60,7 @@
                                     </span>
                                 </td>
                                 <td>
-                                    @if ($consulta->estado == 1)
+                                    @if ($consulta->con_estado == 1)
                                         <span class="badge bg-danger text-uppercase">
                                             Pendiente
                                         </span>

@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Notificacion;
 use App\Models\Users\Consultas;
+use App\Models\Users\Informacion;
+use App\Models\Users\Notificacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GeneralController extends Controller
 {
     public function consultas_list(Request $request)
     {
-        $notificaciones = Notificacion::orderBy('created_at', 'desc')->get();
-        $totalNotificaciones = Notificacion::count();
         $query = Consultas::query();
 
         if ($search = $request->input('search')) {
@@ -71,6 +71,46 @@ class GeneralController extends Controller
 
         $consultas = $query->orderBy('created_at', 'desc')->get();
 
-        return view('admin.client.consultas.principal-consulta', compact('consultas', 'notificaciones', 'totalNotificaciones'));
+        return view('admin.client.consultas.principal-consulta', compact('consultas'));
+    }
+
+    public function panel_control()
+    {
+        $informaciones = Informacion::all();
+        return view('admin.client.panel.principal-panel', compact('informaciones'));
+    }
+
+    public function info_store(Request $request)
+    {
+        $data = $request->all();
+        $data['inf_estado'] = $data['inf_estado'] ?? 1;
+
+        $data['user_created_info'] = Auth::user()->name;
+        $data['user_updated_info'] = Auth::user()->name;
+        $data['date_created_info'] = now();
+        $data['date_updated_info'] = now();
+
+        $informacion = Informacion::create($data);
+
+        if ($request->hasFile('inf_imagen')) {
+            $file = $request->file('inf_imagen');
+
+            $request->validate([
+                'inf_imagen' => 'required|image|max:2048'
+            ]);
+
+            $imagenPath = $file->store('public/imagenes');
+            $fileName = basename($imagenPath);
+            $relativeUrl = 'storage/imagenes/' . $fileName;
+
+            $informacion->inf_imagen = $relativeUrl;
+            $informacion->save();
+        }
+
+        if ($informacion) {
+            return redirect()->back()->with('success', 'Informacion creado exitosamente');
+        } else {
+            return redirect()->back()->with('error', 'Hubo un error al crear la categoría');
+        }
     }
 }

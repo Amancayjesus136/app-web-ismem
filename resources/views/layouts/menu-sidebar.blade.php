@@ -416,6 +416,12 @@
             </div>
 
             <div class="dropdown topbar-head-dropdown ms-1 header-item" id="notificationDropdown">
+                @php
+                    use App\Models\Users\Notificacion;
+                    $totalNotificaciones = Notificacion::count();
+                    $notificaciones = Notificacion::orderBy('created_at', 'desc')->get();
+                @endphp
+
                 <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" id="page-header-notifications-dropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
                     <i class='bx bx-bell fs-22'></i>
                     <span class="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger" id="notification-badge">{{ $totalNotificaciones }}<span class="visually-hidden">unread messages</span></span>
@@ -706,6 +712,11 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('general.consultas_list') }}" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                             <i class="ri-message-2-line"></i> <span data-key="t-dashboard">Consultas</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('general.panel_control') }}" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                            <i class="ri-dashboard-line"></i> <span data-key="t-dashboard">Panel de control</span>
                         </a>
                     </li>
 
