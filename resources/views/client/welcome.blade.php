@@ -354,58 +354,25 @@
         <section class="section" id="wallet">
             <div class="container">
                 <div class="row g-4">
-                    <div class="col-xxl-4 col-lg-4 col-md-6 product-item upto-15">
-                        <div class="card explore-box card-animate">
-                            <div class="card-body">
-                                <h6 class="fs-16 mb-3"><a href="apps-nft-item-details.html">¿Por qué Estudiar en el Instituto ISMEM?</a></h6>
-                                <div>
-                                    <span class="text-muted float-end">Estudiar en el ISMEM te ofrece una oportunidad invaluable para adquirir conocimientos especializados y habilidades prácticas en un entorno educativo estructurado. Los principales beneficios es que te permite desarrollar competencias especializadas que son altamente valoradas en el mercado laboral.</span>
+                    @foreach ($informaciones as $informacion)
+                        <div class="col-xxl-4 col-lg-4 col-md-6 product-item upto-15">
+                            <div class="card explore-box card-animate">
+                                <div class="card-body">
+                                    <h6 class="fs-16 mb-3"><a href="apps-nft-item-details.html">{{ $informacion->inf_titulo }}</a></h6>
+                                    <div>
+                                        <span class="text-muted float-end">{!! $informacion->inf_descripcion !!}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="position-relative rounded overflow-hidden">
-                                <img src="https://ismem.edu.pe/assets/images/instituto.jpg" alt="" class="card-img-top explore-img">
-                                <div class="discount-time">
-                                    <h5 id="auction-time-1" class="mb-0 text-white"></h5>
+                                <div class="position-relative rounded overflow-hidden">
+                                    <img src="{{ asset('public/' . $informacion->inf_imagen) }}" alt="" class="card-img-top explore-img">
+                                    <div class="discount-time">
+                                        <h5 id="auction-time-1" class="mb-0 text-white"></h5>
+                                    </div>
                                 </div>
-                            </div>
 
-                        </div>
-                    </div>
-
-                    <div class="col-xxl-4 col-lg-4 col-md-6 product-item upto-15">
-                        <div class="card explore-box card-animate">
-                            <div class="card-body">
-                                <h6 class="fs-16 mb-3"><a href="apps-nft-item-details.html">Obtén tu bachiller técnico</a></h6>
-                                <div>
-                                    <span class="text-muted float-end">El Bachillerato técnico te ofrece una formación más práctica y especializada, preparándote para ingresar directamente al mundo laboral teniendo más oportunidades y continuar tus estudios en la educación universitaria. <br><br><br><br></span>
-                                </div>
-                            </div>
-                            <div class="position-relative rounded overflow-hidden">
-                                <img src="https://ismem.edu.pe/assets/images/contabilidad.png" alt="" class="card-img-top explore-img">
-                                <div class="discount-time">
-                                    <h5 id="auction-time-1" class="mb-0 text-white"></h5>
-                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-xxl-4 col-lg-4 col-md-6 product-item upto-15">
-                        <div class="card explore-box card-animate">
-                            <div class="card-body">
-                                <h6 class="fs-16 mb-3"><a href="apps-nft-item-details.html">Somos lincenciado por minedu</a></h6>
-                                <div>
-                                    <span class="text-muted float-end">Cumplimos con todas las condiciones básicas de calidad establecidas en la ley y los autoriza a brindar sus carreras profesionales de Contabilidad y Desarrollo de Sistemas de Información; garantizando que la propuesta educativa que permite a los estudiantes accedan a una educación de calidad en todos los aspectos. <br><br></span>
-                                </div>
-                            </div>
-                            <div class="position-relative rounded overflow-hidden">
-                                <img src="https://ismem.edu.pe/assets/images/sistemas.png" alt="" class="card-img-top explore-img">
-                                <div class="discount-time">
-                                    <h5 id="auction-time-1" class="mb-0 text-white"></h5>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <div class="row justify-content-center" style="margin-top: 50px">

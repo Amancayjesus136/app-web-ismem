@@ -7,6 +7,8 @@ use App\Models\Users\Consultas;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Mail\ContactanosMailable;
+use App\Models\Users\Informacion;
+use App\Models\Users\Notificacion as UsersNotificacion;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 
@@ -14,7 +16,8 @@ class WelcomeController extends Controller
 {
     public function welcome()
     {
-        return view('client.welcome');
+        $informaciones = Informacion::all();
+        return view('client.welcome', compact('informaciones'));
     }
 
     public function welcome_talleres()
@@ -33,7 +36,7 @@ class WelcomeController extends Controller
             if ($consulta) {
                 $fullName = $consulta->con_nombres . ' ' . $consulta->con_apellidos;
 
-                Notificacion::create([
+                UsersNotificacion::create([
                     'type' => 'consultas',
                     'data' => json_encode(['message' => 'El cliente ' . $fullName . ', solicitó información.']),
                     'status' => 1,

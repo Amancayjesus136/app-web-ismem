@@ -130,4 +130,35 @@ class GeneralController extends Controller
         }
     }
 
+    public function info_update(Request $request, $id_informacion)
+    {
+        $informacion = Informacion::findOrFail($id_informacion);
+
+        $request->validate([
+            'inf_imagen' => 'nullable|image|max:2048',
+            'inf_estado' => 'nullable|integer',
+        ]);
+
+        $data = $request->except('inf_imagen');
+        $data['user_updated_info'] = Auth::user()->name;
+        $data['date_updated_info'] = now();
+
+        $informacion->update($data);
+
+        if ($request->hasFile('inf_imagen')) {
+            $file = $request->file('inf_imagen');
+
+            $imagenPath = $file->store('public/imagenes');
+            $fileName = basename($imagenPath);
+
+            $relativeUrl = 'storage/imagenes/' . $fileName;
+            $informacion->inf_imagen = $relativeUrl;
+        }
+
+        $informacion->save();
+
+        return redirect()->back()->with('success', 'Información actualizada exitosamente');
+    }
+
+
 }

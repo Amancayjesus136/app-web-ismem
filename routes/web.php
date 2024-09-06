@@ -39,5 +39,6 @@ Route::get('/consultas/listado', [GeneralController::class, 'consultas_list'])->
 
 Route::get('/panel/general', [GeneralController::class, 'panel_control'])->name('general.panel_control');
 Route::post('/info/store', [GeneralController::class, 'info_store'])->name('general.info_store');
+Route::put('/info/update/{id_informacion}', [GeneralController::class, 'info_update'])->name('general.info_update');
 
 require __DIR__.'/auth.php';

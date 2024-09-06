@@ -122,8 +122,7 @@
                                                                             <i class="ri-more-fill"></i>
                                                                         </button>
                                                                         <ul class="dropdown-menu">
-                                                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-eye-fill text-muted me-2 align-bottom"></i>View</a></li>
-                                                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-star-fill text-muted me-2 align-bottom"></i>Favourite</a></li>
+                                                                            <li><a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editInformacion{{ $informacion->id_informacion }}"><i class="ri-edit-fill text-muted me-2 align-bottom"></i> Edit</a></li>
                                                                             <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-fill text-muted me-2 align-bottom"></i>Delete</a></li>
                                                                         </ul>
                                                                     </div>
@@ -137,15 +136,13 @@
                                                                     <div class="card-body">
                                                                         <ul class="list-inline fs-14 text-muted">
                                                                             <li class="list-inline-item">
-                                                                                <i class="ri-calendar-line align-bottom me-1"></i> 30 Oct, 2021
+                                                                                <i class="ri-calendar-line align-bottom me-1"></i>{{ \Carbon\Carbon::parse($informacion->created_at)->locale('es')->timezone('America/Lima')->isoFormat('DD [de] MMMM [del] YYYY [a las] hh:mm A') }}
                                                                             </li>
                                                                         </ul>
                                                                         <a href="javascript:void(0);">
-                                                                            <h5>Design your apps in your own way ?</h5>
+                                                                            <h5>{{ $informacion->inf_titulo }}</h5>
                                                                         </a>
-                                                                        <p class="text-muted fs-14">One disadvantage of Lorum Ipsum is that in Latin certain letters appear more frequently than others.</p>
-
-
+                                                                        <p class="text-muted fs-14">{!! $informacion->inf_descripcion !!}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -196,7 +193,7 @@
                                                                     <div class="col-lg-12 mt-2">
                                                                         <div>
                                                                             <label for="role" class="form-label">Descripcion</label>
-                                                                            <textarea id="summernote" name="inf_descripcion" class="form-control"></textarea>
+                                                                            <textarea id="summernoteCreate" name="inf_descripcion" class="form-control"></textarea>
                                                                             <div class="valid-feedback">
                                                                                 Se ve bien!
                                                                             </div>
@@ -211,7 +208,7 @@
                                                         <div class="modal-footer">
                                                             <div class="hstack gap-2 justify-content-end">
                                                                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-success" id="add-btn">Add Contact</button>
+                                                                <button type="submit" class="btn btn-primary" id="add-btn">Add Contact</button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -220,7 +217,87 @@
                                         </div>
                                     </div>
 
-                                    <div class="card">
+                                    @foreach ($informaciones as $informacion)
+                                        <div class="modal fade" id="editInformacion{{ $informacion->id_informacion }}" tabindex="-1" aria-labelledby="editInformacionLabel{{ $informacion->id_informacion }}" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="editInformacionLabel{{ $informacion->id_informacion }}">Actualizar Información</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="{{ route('general.info_update', $informacion->id_informacion) }}" method="post" class="tablelist-form needs-validation" enctype="multipart/form-data" autocomplete="off" novalidate>
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <div class="row g-3">
+                                                                <div class="col-lg-12 text-center">
+                                                                    <div class="profile-user position-relative d-inline-block mx-auto mb-4">
+                                                                        <img id="user-profile-image{{ $informacion->id_informacion }}"
+                                                                            src="{{ asset('public/' . $informacion->inf_imagen) }}"
+                                                                            class="rounded-circle avatar-xl img-thumbnail user-profile-image"
+                                                                            alt="user-profile-image">
+                                                                        <input id="profile-img-file-input{{ $informacion->id_informacion }}"
+                                                                            name="inf_imagen"
+                                                                            type="file"
+                                                                            accept="image/*"
+                                                                            class="profile-img-file-input">
+                                                                        <label for="profile-img-file-input{{ $informacion->id_informacion }}"
+                                                                            class="profile-photo-edit avatar-xs">
+                                                                            <span class="avatar-title rounded-circle bg-light text-body">
+                                                                                <i class="ri-camera-fill"></i>
+                                                                            </span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <div>
+                                                                        <label for="titulo{{ $informacion->id_informacion }}" class="form-label">Título</label>
+                                                                        <input
+                                                                            type="text"
+                                                                            id="titulo{{ $informacion->id_informacion }}"
+                                                                            name="inf_titulo"
+                                                                            class="form-control"
+                                                                            value="{{ $informacion->inf_titulo }}"
+                                                                            placeholder="Enter title"
+                                                                            required
+                                                                        />
+                                                                        <div class="valid-feedback">
+                                                                            Looks good!
+                                                                        </div>
+                                                                        <div class="invalid-feedback text-end">
+                                                                            The title is necessary
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12 mt-2">
+                                                                    <div>
+                                                                        <label for="role{{ $informacion->id_informacion }}" class="form-label">Descripción</label>
+                                                                        <textarea id="summernoteEdit{{ $informacion->id_informacion }}"
+                                                                            name="inf_descripcion"
+                                                                            class="form-control">{{ $informacion->inf_descripcion }}</textarea>
+                                                                        <div class="valid-feedback">
+                                                                            Se ve bien!
+                                                                        </div>
+                                                                        <div class="invalid-feedback text-end">
+                                                                            Se debe agregar información!
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <div class="hstack gap-2 justify-content-end">
+                                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary" id="update-btn">Actualizar</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+                                    {{-- <div class="card">
                                         <div class="card-header align-items-center d-flex">
                                             <h4 class="card-title mb-0 flex-grow-1">Comments</h4>
                                             <div class="flex-shrink-0">
@@ -235,7 +312,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div><!-- end card header -->
+                                        </div>
 
                                         <div class="card-body">
 
@@ -313,11 +390,11 @@
                                             </form>
                                         </div>
                                         <!-- end card body -->
-                                    </div>
+                                    </div> --}}
                                     <!-- end card -->
                                 </div>
                                 <!-- ene col -->
-                                <div class="col-xl-3 col-lg-4">
+                                {{-- <div class="col-xl-3 col-lg-4">
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title mb-4">Skills</h5>
@@ -331,9 +408,7 @@
                                                 <div class="badge fw-medium badge-soft-secondary">Nodejs</div>
                                             </div>
                                         </div>
-                                        <!-- end card body -->
                                     </div>
-                                    <!-- end card -->
 
                                     <div class="card">
                                         <div class="card-header align-items-center d-flex border-bottom-dashed">
@@ -500,7 +575,6 @@
                                         </div>
                                         <!-- end card body -->
                                     </div>
-                                    <!-- end card -->
 
                                     <div class="card">
                                         <div class="card-header align-items-center d-flex border-bottom-dashed">
@@ -640,14 +714,10 @@
                                         </div>
                                         <!-- end card body -->
                                     </div>
-                                    <!-- end card -->
-                                </div>
-                                <!-- end col -->
+                                </div> --}}
                             </div>
-                            <!-- end row -->
                         </div>
-                        <!-- end tab pane -->
-                        <div class="tab-pane fade" id="project-documents" role="tabpanel">
+                        {{-- <div class="tab-pane fade" id="project-documents" role="tabpanel">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center mb-4">
@@ -858,7 +928,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- end tab pane -->
                         <div class="tab-pane fade" id="project-activities" role="tabpanel">
                             <div class="card">
                                 <div class="card-body">
@@ -1001,7 +1070,6 @@
                             </div>
                             <!--end card-->
                         </div>
-                        <!-- end tab pane -->
                         <div class="tab-pane fade" id="project-team" role="tabpanel">
                             <div class="row g-4 mb-3">
                                 <div class="col-sm">
@@ -1630,8 +1698,7 @@
                                     </ul>
                                 </div><!-- end col -->
                             </div><!-- end row -->
-                        </div>
-                        <!-- end tab pane -->
+                        </div> --}}
                     </div>
                 </div>
                 <!-- end col -->
@@ -1688,6 +1755,72 @@
                 }
             });
         });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Para los modales de edición
+            document.querySelectorAll('[id^="profile-img-file-inputEdit"]').forEach(function (inputElement) {
+                inputElement.addEventListener('change', function (e) {
+                    var selectedImage = e.target.files[0];
+                    var modalId = inputElement.getAttribute('data-modal-id'); // ID del modal
+
+                    if (selectedImage) {
+                        var imageUrl = URL.createObjectURL(selectedImage);
+                        document.getElementById('user-profile-image' + modalId).src = imageUrl;
+                    }
+                });
+            });
+        });
+    </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Para los modales de edición
+        document.querySelectorAll('[id^="profile-img-file-input"]').forEach(function (inputElement) {
+            inputElement.addEventListener('change', function (e) {
+                var selectedImage = e.target.files[0];
+                var modalId = inputElement.id.replace('profile-img-file-input', ''); // Extraer el ID del modal
+
+                if (selectedImage) {
+                    var imageUrl = URL.createObjectURL(selectedImage);
+                    document.getElementById('user-profile-image' + modalId).src = imageUrl;
+                }
+            });
+        });
+    });
+</script>
+
+
+    <script>
+            @foreach ($informaciones as $informacion)
+        $(document).ready(function() {
+            $('#summernoteEdit{{ $informacion->id_informacion }}').summernote({
+                height: 200,
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']]
+                ]
+            });
+        });
+    @endforeach
+
+    $(document).ready(function() {
+        $('#summernoteCreate').summernote({
+            height: 200,
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
+        });
+    });
+</script>
     </script>
 
 
