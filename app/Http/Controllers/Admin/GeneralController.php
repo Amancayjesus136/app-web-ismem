@@ -8,9 +8,24 @@ use App\Models\Users\Informacion;
 use App\Models\Users\Notificacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 
 class GeneralController extends Controller
 {
+    public function createSymlink(): JsonResponse
+    {
+        if (file_exists(public_path('storage'))) {
+            File::delete(public_path('storage'));
+        }
+
+        Artisan::call('storage:link');
+
+        return response()->json(['message' => 'Symlink created successfully.']);
+    }
+
     public function consultas_list(Request $request)
     {
         $query = Consultas::query();
@@ -101,6 +116,7 @@ class GeneralController extends Controller
 
             $imagenPath = $file->store('public/imagenes');
             $fileName = basename($imagenPath);
+
             $relativeUrl = 'storage/imagenes/' . $fileName;
 
             $informacion->inf_imagen = $relativeUrl;
@@ -108,9 +124,10 @@ class GeneralController extends Controller
         }
 
         if ($informacion) {
-            return redirect()->back()->with('success', 'Informacion creado exitosamente');
+            return redirect()->back()->with('success', 'Información creada exitosamente');
         } else {
             return redirect()->back()->with('error', 'Hubo un error al crear la categoría');
         }
     }
+
 }

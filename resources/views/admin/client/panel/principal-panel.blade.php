@@ -129,9 +129,9 @@
                                                                     </div>
                                                                     <div class="card-body">
                                                                         @if ($informacion->inf_imagen)
-                                                                            <img src="{{ asset('public/' . $informacion->inf_imagen) }}" alt="" class="img-fluid rounded">
+                                                                            <img src="{{ asset('public/' . $informacion->inf_imagen) }}" alt="Imagen registrada" class="img-fluid rounded">
                                                                         @else
-                                                                            <img src="{{ asset('assets/images/sin-foto.jpg') }}" alt="" class="img-fluid rounded">
+                                                                            <img src="{{ asset('assets/images/sin-foto.jpg') }}" alt="Sin imagen" class="img-fluid rounded">
                                                                         @endif
                                                                     </div>
                                                                     <div class="card-body">
