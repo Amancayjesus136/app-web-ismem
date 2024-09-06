@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\GeneralController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -23,9 +25,7 @@ Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
 Route::post('/consultar-dni', [WelcomeController::class, 'consultarDni'])->name('welcome.consultarDni');
 Route::post('/consulta/crear', [WelcomeController::class, 'store_consulta'])->name('welcome.store_consulta');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -33,5 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/consultas/listado', [GeneralController::class, 'consultas_list'])->name('general.consultas_list');
 
 require __DIR__.'/auth.php';

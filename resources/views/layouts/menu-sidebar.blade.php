@@ -768,6 +768,17 @@
                 <ul class="navbar-nav" id="navbar-nav">
                     <li class="menu-title"><span data-key="t-menu">Menu</span></li>
                     <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('login') }}" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                            <i class="bx bx-home"></i> <span data-key="t-dashboard">Inicio</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('general.consultas_list') }}" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                            <i class="ri-message-2-line"></i> <span data-key="t-dashboard">Consultas</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                             <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Dashboards</span>
                         </a>
