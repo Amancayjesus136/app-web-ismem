@@ -2,13 +2,11 @@
 @section('content')
 
 <div class="main-content">
-
     <div class="page-content">
         <div class="container-fluid">
 
             <div class="row">
                 <div class="col">
-
                     <div class="h-100">
                         <div class="row mb-3 pb-1">
                             <div class="col-12">
@@ -33,7 +31,7 @@
                                         <div class="d-flex align-items-end justify-content-between mt-4">
                                             <div>
                                                 <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span>{{ $totalConsultas ?? 0 }}</span></h4>
-                                                <a href="" class="text-decoration-underline text-muted">Ver detalles</a>
+                                                <a href="{{ route('general.consultas_list') }}" class="text-decoration-underline text-muted">Ver detalles</a>
                                             </div>
                                             <div class="avatar-sm flex-shrink-0">
                                                 <span class="avatar-title bg-soft-primary rounded fs-3">

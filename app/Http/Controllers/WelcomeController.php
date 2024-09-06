@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notificacion;
 use App\Models\Users\Consultas;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
@@ -28,9 +29,19 @@ class WelcomeController extends Controller
             $consulta = Consultas::create($data);
 
             if ($consulta) {
+                $fullName = $consulta->con_nombres . ' ' . $consulta->con_apellidos;
+
+                Notificacion::create([
+                    'type' => 'consultas',
+                    'data' => json_encode(['message' => 'El cliente ' . $fullName . ', solicitó información.']),
+                    'status' => 1,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+
                 return response()->json([
                     'success' => true,
-                    'message' => 'Consulta enviado correctamente'
+                    'message' => 'Consulta enviada correctamente'
                 ]);
             } else {
                 return response()->json([
