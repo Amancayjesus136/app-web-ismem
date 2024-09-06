@@ -1,7 +1,7 @@
 @extends('layouts.invitate')
 @section('content')
     <div class="d-lg-flex half">
-        <div class="bg order-1 order-md-2" style="background-image: url('https://media.licdn.com/dms/image/v2/C4E1BAQFCddSPmCcWKg/company-background_10000/company-background_10000/0/1621733226122/ismem_cover?e=2147483647&v=beta&t=YoXuT4f14x7JWkr15AY2_yexSlVMzIDKbRH-6Fpcq-w');"></div>
+        <div class="bg order-1 order-md-2" style="background-image: url('{{ asset('assets/img/fondo-login.jpeg') }}');"></div>
         <div class="contents order-2 order-md-1">
 
             <div class="container">

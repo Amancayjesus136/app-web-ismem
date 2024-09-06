@@ -159,9 +159,9 @@
                                 <source src="{{ asset('assets/images/videos/video_welcome.mp4') }}" type="video/mp4">
                             </video>
 
-                            <div class="hstack gap-2 justify-content-center mb-5">
-                                <a href="#" class="btn btn-primary">Registrate <i class="ri-arrow-right-line align-middle ms-1"></i></a>
-                                <a href="#" class="btn btn-danger">Inicia Seción<i class="ri-arrow-right-line align-middle ms-1"></i></a>
+                            <div class="hstack gap-2 justify-start-center mb-5">
+                                {{-- <a href="{{ route('register') }}" class="btn btn-primary">Registrate <i class="ri-arrow-right-line align-middle ms-1"></i></a> --}}
+                                <a href="{{ route('login') }}" class="btn btn-danger">Inicia sesión como alumno!<i class="ri-arrow-right-line align-middle ms-1"></i></a>
                             </div>
                         </div>
                     </div>

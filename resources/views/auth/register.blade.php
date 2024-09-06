@@ -9,6 +9,19 @@
                     <div class="col-md-7">
                         <h3><strong>Bienvenid@ de nuevo!</strong></h3>
                         <p class="mb-4">Registrate por primera vez!</p>
+
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if (session('limit'))
+                            <div class="alert alert-danger">
+                                {{ session('limit') }}
+                            </div>
+                        @endif
+
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             <div class="form-group first">
@@ -56,7 +69,7 @@
                                 <span class="ml-auto"><a href="#" class="forgot-pass">Has olvidado tu contraseña?</a></span>
                             </div>
 
-                            <input type="submit" value="Inicia Seción" class="btn btn-block btn-primary">
+                            <input type="submit" value="Inicia Sesión" class="btn btn-block btn-primary">
 
                         </form>
                     </div>
